@@ -50,7 +50,7 @@ struct SolarSysCodeAlongView: View {
                 scale: 1.0,
                 distanceFromCenter: 1.0)
             if let earth = earth, let sun = sun {
-                sun.addChild(earth)
+                sun.addChildToMainBody(earth)
             }
             
             // 3D Model - Moon
@@ -58,9 +58,9 @@ struct SolarSysCodeAlongView: View {
                 bundle: SolarSysRealityKitResources.bundle,
                 name: "Moon",
                 scale: 1.0 / 2.0,
-                distanceFromCenter: 0.5)
+                distanceFromCenter: 0.2)
             if let earth = earth, let moon = moon {
-                earth.addChild(moon)
+                earth.addChildToMainBody(moon)
             }
 
         } update: { content in
@@ -68,8 +68,8 @@ struct SolarSysCodeAlongView: View {
                 await sun?.updateRotation(speed: standardSpeed / 27.0)  // 27 Earth-day
                 await earth?.updateRotation(speed: standardSpeed / 1.0) // One day
                 await earth?.updateOrbit(speed: standardSpeed / 10)     // 10 days
-                await moon?.updateRotation(speed: standardSpeed / 27.0) // One day
-                await moon?.updateOrbit(speed: standardSpeed / 27)     // 10 days
+                await moon?.updateRotation(speed: standardSpeed / 2.0) // One day
+                await moon?.updateOrbit(speed: standardSpeed / 10)     // 10 days
             }
         }
         .onAppear {

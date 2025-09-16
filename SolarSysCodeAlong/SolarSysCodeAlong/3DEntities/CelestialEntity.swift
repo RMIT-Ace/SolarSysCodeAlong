@@ -66,4 +66,14 @@ class CelestialEntity: Entity {
             rotationAxis: [0, 1, 0]
         )
     }
+    
+    /// Add and entity to the main body, not the pivot-point body.
+    func addChildToMainBody(_ child: Entity) {
+        guard let mainBody = findEntity(named: "NonRotatingMainBody") else {
+            print("WARN: Entity does not have main body.")
+            return
+        }
+        
+        mainBody.addChild(child)
+    }
 }
