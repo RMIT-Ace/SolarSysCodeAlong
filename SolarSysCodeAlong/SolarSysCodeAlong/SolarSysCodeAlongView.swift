@@ -44,13 +44,23 @@ struct SolarSysCodeAlongView: View {
                 print("DEBUG: Can't load starfield.")
             }
             
+            // Skybox
             if let hapiLabTexture = try? await TextureResource(named: "HAPI-lab", in: SolarSysRealityKitResources.bundle) {
-                let mesh = MeshResource.generateSphere(radius: 0.25)
+                let mesh = MeshResource.generateSphere(radius: 10)
                 let material = UnlitMaterial(texture: hapiLabTexture)
                 let hapiSphere = ModelEntity(mesh: mesh, materials: [material])
                 hapiSphere.transform = Transform(translation: SIMD3(0, 0.5, depth))
                 content.add(hapiSphere)
-
+                hapiSphere.transform.scale = SIMD3(-1, 1, 1)
+            }
+            
+            // 3D Model
+            if let url = SolarSysRealityKitResources.bundle.url(forResource: "Earth", withExtension: "usdz"),
+               let earth = try? await ModelEntity(contentsOf: url) {
+                earth.transform = Transform(translation: SIMD3(0, -0.5, depth))
+                content.add(earth)
+            } else {
+                print("DEBUG: Can't load Earth.")
             }
         }
         .ignoresSafeArea()
