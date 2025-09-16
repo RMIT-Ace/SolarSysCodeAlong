@@ -11,59 +11,66 @@ import SolarSysRealityKit
 
 struct SolarSysCodeAlongView: View {
     
-    let depth: Float = -3.0
-    let boxSize: Float = 2.0
+    static let secondsInOneEarthRotation: Float = .pi * 2.0
     
+    @State var root: Entity!
+    @State var sun: CelestialEntity?
+    @State var earth: CelestialEntity?
+    @State var moon: CelestialEntity?
+    @State var secondsInOneEarthDay: Float = 1.0
+    
+    var standardSpeed: Float {
+        Self.secondsInOneEarthRotation / secondsInOneEarthDay
+    }
+
     var body: some View {
         RealityView { content in
             content.camera = .spatialTracking
             
             await makeSkybox(content)
             
-            let box = ModelEntity(
-                mesh: .generateBox(size: boxSize),
-                materials: [
-                    SimpleMaterial(
-                        color: .blue.withAlphaComponent(0.2), isMetallic: false
-                    )
-                ]
-            )
-            box.transform = Transform(translation: SIMD3(0, 0, depth))
-            content.add(box)
-            box.components.set( RotationComponent(rotationSpeed: 1) )
-            
-            // 3D Model - Earth
-            if let url = SolarSysRealityKitResources.bundle.url(forResource: "Earth", withExtension: "usdz"),
-               let earth = try? await ModelEntity(contentsOf: url) {
-                box.addChild(earth)
-                earth.position.x = boxSize / 2.0
-                earth.components.set(
-                    RotationComponent(rotationSpeed: 20.0)
-                )
-                
-                // 3D Model - Moon
-                if let url = SolarSysRealityKitResources.bundle.url(forResource: "Moon", withExtension: "usdz"),
-                   let moon = try? await ModelEntity(contentsOf: url) {
-                    box.addChild(moon)
-                    moon.position.x = 0.3
-                    moon.scale = SIMD3(repeating: 0.3)
-                    earth.addChild(moon)
-                }
-            }
+            root = Entity()
+            content.add(root)
+            root.position.z = -1.0
             
             // 3D Model - Sun
-            if let url = SolarSysRealityKitResources.bundle.url(forResource: "Sun", withExtension: "usdz"),
-               let sun = try? await ModelEntity(contentsOf: url) {
-//                box.addChild(sun)
-                content.add(sun)
-                sun.transform = Transform(translation: SIMD3(0, 0, depth))
-                sun.scale = SIMD3(repeating: 4)
-                sun.components.set(
-                    // Speed of 1 will make it stands still. Must offset the speed of box.
-                    RotationComponent(rotationSpeed: 1.0, rotationAxis: [0, -1, 0])
-                )
+            sun = await CelestialEntity(
+                bundle: SolarSysRealityKitResources.bundle,
+                name: "Sun",
+                scale: 3.0,
+                distanceFromCenter: 0.0)
+            if let sun = sun {
+                root.addChild(sun)
             }
 
+            // 3D Model - Earth
+            earth = await CelestialEntity(
+                bundle: SolarSysRealityKitResources.bundle,
+                name: "Earth",
+                scale: 1.0,
+                distanceFromCenter: 1.0)
+            if let earth = earth, let sun = sun {
+                sun.addChild(earth)
+            }
+            
+            // 3D Model - Moon
+            moon = await CelestialEntity(
+                bundle: SolarSysRealityKitResources.bundle,
+                name: "Moon",
+                scale: 1.0 / 2.0,
+                distanceFromCenter: 0.5)
+            if let earth = earth, let moon = moon {
+                earth.addChild(moon)
+            }
+
+        } update: { content in
+            Task {
+                await sun?.updateRotation(speed: standardSpeed / 27.0)  // 27 Earth-day
+                await earth?.updateRotation(speed: standardSpeed / 1.0) // One day
+                await earth?.updateOrbit(speed: standardSpeed / 10)     // 10 days
+                await moon?.updateRotation(speed: standardSpeed / 27.0) // One day
+                await moon?.updateOrbit(speed: standardSpeed / 27)     // 10 days
+            }
         }
         .onAppear {
             RotationSystem.registerSystem()
@@ -77,7 +84,6 @@ struct SolarSysCodeAlongView: View {
             let mesh = MeshResource.generateSphere(radius: 10)
             let material = UnlitMaterial(texture: hapiLabTexture)
             let hapiSphere = ModelEntity(mesh: mesh, materials: [material])
-            hapiSphere.transform = Transform(translation: SIMD3(0, 0.5, depth))
             content.add(hapiSphere)
             hapiSphere.transform.scale = SIMD3(-1, 1, 1)
         }
