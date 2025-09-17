@@ -14,7 +14,7 @@ import RealityKit
 class CelestialEntity: Entity {
     
     required init() {
-        fatalError("init() has not been implemented")
+        super.init()
     }
     
     required init?(
@@ -37,7 +37,7 @@ class CelestialEntity: Entity {
             scale: SIMD3(repeating: scale),
             translation: .init(x: distanceFromCenter, y: 0, z: 0)
         )
-        addChild(celestialObj)
+        super.addChild(celestialObj)
         
         // For adding children. No Visual appearance..
         let nonRotatingMainBody = Entity()
@@ -45,7 +45,7 @@ class CelestialEntity: Entity {
         nonRotatingMainBody.transform = Transform(
             translation: .init(x: distanceFromCenter, y: 0, z: 0)
         )
-        addChild(nonRotatingMainBody)
+        super.addChild(nonRotatingMainBody)
     }
     
     func updateRotation(speed: Float) async {
@@ -70,7 +70,7 @@ class CelestialEntity: Entity {
     /// Add and entity to the main body, not the pivot-point body.
     func addChild(_ child: Entity) {
         guard let mainBody = findEntity(named: "NonRotatingMainBody") else {
-            print("WARN: Entity does not have main body.")
+            print("WARN: Entity \(name) does not have main body.")
             super.addChild(child)
             return
         }

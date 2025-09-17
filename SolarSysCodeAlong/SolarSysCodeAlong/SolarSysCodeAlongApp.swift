@@ -12,6 +12,7 @@ struct SolarSysCodeAlongApp: App {
     var body: some Scene {
         WindowGroup {
             SolarSysCodeAlongView()
+                .environment(SolarSysViewModel())
         }
     }
 }

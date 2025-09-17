@@ -10,10 +10,11 @@ import RealityKit
 import SolarSysRealityKit
 
 struct SolarSysCodeAlongView: View {
+    @Environment(SolarSysViewModel.self) private var vm
     
     static let secondsInOneEarthRotation: Float = .pi * 2.0
     
-    @State var root: Entity!
+    @State var root: CelestialEntity!
     @State var sun: CelestialEntity?
     @State var earth: CelestialEntity?
     @State var moon: CelestialEntity?
@@ -29,7 +30,7 @@ struct SolarSysCodeAlongView: View {
             
             await makeSkybox(content)
             
-            root = Entity()
+            root = CelestialEntity()
             content.add(root)
             root.position.z = -1.0
             
@@ -66,10 +67,10 @@ struct SolarSysCodeAlongView: View {
         } update: { content in
             Task {
                 await sun?.updateRotation(speed: standardSpeed / 27.0)  // 27 Earth-day
-                await earth?.updateRotation(speed: standardSpeed / 1.0) // One day
+                await earth?.updateRotation(speed: standardSpeed / 10.0) // One day
                 await earth?.updateOrbit(speed: standardSpeed / 10)     // 10 days
-                await moon?.updateRotation(speed: standardSpeed / 2.0) // One day
-                await moon?.updateOrbit(speed: standardSpeed / 10)     // 10 days
+                await moon?.updateRotation(speed: standardSpeed / 2.0) // 2 days
+                await moon?.updateOrbit(speed: standardSpeed / 0.5)     // 5 days
             }
         }
         .onAppear {
@@ -92,4 +93,5 @@ struct SolarSysCodeAlongView: View {
 
 #Preview {
     SolarSysCodeAlongView()
+        .environment(SolarSysViewModel())
 }
