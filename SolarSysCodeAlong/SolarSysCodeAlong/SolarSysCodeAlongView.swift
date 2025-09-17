@@ -50,7 +50,7 @@ struct SolarSysCodeAlongView: View {
                 scale: 1.0,
                 distanceFromCenter: 1.0)
             if let earth = earth, let sun = sun {
-                sun.addChildToMainBody(earth)
+                sun.addChild(earth)
             }
             
             // 3D Model - Moon
@@ -60,7 +60,7 @@ struct SolarSysCodeAlongView: View {
                 scale: 1.0 / 2.0,
                 distanceFromCenter: 0.2)
             if let earth = earth, let moon = moon {
-                earth.addChildToMainBody(moon)
+                earth.addChild(moon)
             }
 
         } update: { content in
