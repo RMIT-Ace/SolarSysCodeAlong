@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5065B3762E78DFCE002F5388 /* SolarSysRealityKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5065B3752E78DFCE002F5388 /* SolarSysRealityKit */; };
 		50D8CCDC2E78107200750A99 /* SolarSysRealityKit in Frameworks */ = {isa = PBXBuildFile; productRef = 50D8CCDB2E78107200750A99 /* SolarSysRealityKit */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5065B3762E78DFCE002F5388 /* SolarSysRealityKit in Frameworks */,
 				50D8CCDC2E78107200750A99 /* SolarSysRealityKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,6 +73,7 @@
 			name = SolarSysCodeAlong;
 			packageProductDependencies = (
 				50D8CCDB2E78107200750A99 /* SolarSysRealityKit */,
+				5065B3752E78DFCE002F5388 /* SolarSysRealityKit */,
 			);
 			productName = SolarSysCodeAlong;
 			productReference = 50D8CCCC2E78102D00750A99 /* SolarSysCodeAlong.app */;
@@ -101,7 +104,7 @@
 			mainGroup = 50D8CCC32E78102D00750A99;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				50D8CCDA2E78107200750A99 /* XCLocalSwiftPackageReference "../../SolarSysRealityKit/SolarSysRealityKit" */,
+				5065B3742E78DFCE002F5388 /* XCRemoteSwiftPackageReference "SolarSysRealityKit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 50D8CCCD2E78102D00750A99 /* Products */;
@@ -265,6 +268,8 @@
 				DEVELOPMENT_TEAM = Z6UU7WL5HP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Solar Sys";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Access to camera for spatial tracking.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -297,6 +302,8 @@
 				DEVELOPMENT_TEAM = Z6UU7WL5HP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Solar Sys";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Access to camera for spatial tracking.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -342,14 +349,23 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		50D8CCDA2E78107200750A99 /* XCLocalSwiftPackageReference "../../SolarSysRealityKit/SolarSysRealityKit" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../../SolarSysRealityKit/SolarSysRealityKit;
+/* Begin XCRemoteSwiftPackageReference section */
+		5065B3742E78DFCE002F5388 /* XCRemoteSwiftPackageReference "SolarSysRealityKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RMIT-Ace/SolarSysRealityKit";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
 		};
-/* End XCLocalSwiftPackageReference section */
+/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5065B3752E78DFCE002F5388 /* SolarSysRealityKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5065B3742E78DFCE002F5388 /* XCRemoteSwiftPackageReference "SolarSysRealityKit" */;
+			productName = SolarSysRealityKit;
+		};
 		50D8CCDB2E78107200750A99 /* SolarSysRealityKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SolarSysRealityKit;

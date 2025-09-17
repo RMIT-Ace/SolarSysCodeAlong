@@ -1,0 +1,15 @@
+{
+  "originHash" : "e79cf73c11fd397db4d938a6c9e1995503d199e5e6cbce96fb5b1273a82b482b",
+  "pins" : [
+    {
+      "identity" : "solarsysrealitykit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/RMIT-Ace/SolarSysRealityKit",
+      "state" : {
+        "branch" : "main",
+        "revision" : "834e560cca3a6f15c3374a63236394668c83d2c6"
+      }
+    }
+  ],
+  "version" : 3
+}

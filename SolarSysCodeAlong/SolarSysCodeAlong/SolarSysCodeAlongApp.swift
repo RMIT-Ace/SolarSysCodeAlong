@@ -11,7 +11,7 @@ import SwiftUI
 struct SolarSysCodeAlongApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SolarSysCodeAlongView()
         }
     }
 }
