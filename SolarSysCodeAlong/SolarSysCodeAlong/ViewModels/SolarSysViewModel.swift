@@ -22,15 +22,15 @@ class SolarSysViewModel {
                     name: "Earth",
                     scale: 1.0,
                     distanceCenter: 1.0,
-                    rotationSpeed: 1.0,
-                    orbitalSpeed: 2.0,
+                    rotationSpeed: 3.0,
+                    orbitalSpeed: 10.0,
                     satellites: [
                         CelestialObject(
                             name: "Moon",
                             scale: 1.0 / 2.0,
                             distanceCenter: 0.2,
                             rotationSpeed: 2.0,
-                            orbitalSpeed: 10.0,
+                            orbitalSpeed: 1.0,
                         )
                     ]
                 ),

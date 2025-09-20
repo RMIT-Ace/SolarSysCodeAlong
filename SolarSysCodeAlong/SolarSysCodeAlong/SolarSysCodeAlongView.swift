@@ -41,17 +41,33 @@ struct SolarSysCodeAlongView: View {
             
         } update: { content in
             Task {
-                await sun?.updateRotation(speed: standardSpeed / 27.0)  // 27 Earth-day
-                await earth?.updateRotation(speed: standardSpeed / 10.0) // One day
-                await earth?.updateOrbit(speed: standardSpeed / 10)     // 10 days
-                await moon?.updateRotation(speed: standardSpeed / 2.0) // 2 days
-                await moon?.updateOrbit(speed: standardSpeed / 0.5)     // 5 days
+                await updateCelestialMovements(
+                    in: root,
+                    for: vm.celestialObjects.first,
+                    standardSpeed: standardSpeed)
             }
         }
         .onAppear {
             RotationSystem.registerSystem()
         }
         .ignoresSafeArea()
+    }
+    
+    private func updateCelestialMovements(
+        in parent: CelestialEntity,
+        for celestialObject: CelestialObject?,
+        standardSpeed: Float
+    ) async {
+        guard let celestialObject else { return }
+        guard let celestialEntity = root.findEntity(named: celestialObject.name) as? CelestialEntity else {
+            print(">> WARN: Could not find model for \(celestialObject.name)")
+            return
+        }
+        await celestialEntity.updateRotation(speed: standardSpeed / celestialObject.rotationSpeed)
+        await celestialEntity.updateOrbit(speed: standardSpeed / celestialObject.orbitalSpeed)
+        for child in celestialObject.satellites {
+            await updateCelestialMovements(in: celestialEntity, for: child, standardSpeed: standardSpeed)
+        }
     }
     
     private func addCelestialEntity(
