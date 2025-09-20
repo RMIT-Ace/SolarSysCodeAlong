@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import RealityKit
+import SolarSysRealityKit
 
 @Observable
 class SolarSysViewModel {
@@ -37,4 +39,46 @@ class SolarSysViewModel {
             ]
         )
     ]
+    
+    func setupCelestialSystem(
+        for parent: CelestialEntity,
+        celestialObj: CelestialObject? = nil
+    ) async {
+        guard let celestialObj = celestialObj ?? celestialObjects.first
+        else { return }
+        guard let newCelestialEntity = await CelestialEntity(
+            bundle: SolarSysRealityKitResources.bundle,
+            name: celestialObj.name,
+            scale: celestialObj.scale,
+            distanceFromCenter: celestialObj.distanceCenter
+        )  else {
+            print(">> WARN: Could not create model for \(celestialObj.name)")
+            return
+        }
+        parent.addChild(newCelestialEntity)
+        for child in celestialObj.satellites {
+            await setupCelestialSystem(
+                for: newCelestialEntity,
+                celestialObj: child
+            )
+        }
+    }
+    
+    func updateCelestialMovements(
+        in parent: CelestialEntity,
+        for celestialObj: CelestialObject?,
+        standardSpeed: Float
+    ) async {
+        guard let celestialObj = celestialObj ?? celestialObjects.first
+        else { return }
+        guard let celestialEntity = parent.findEntity(named: celestialObj.name) as? CelestialEntity else {
+            print(">> WARN: Could not find model for \(celestialObj.name)")
+            return
+        }
+        await celestialEntity.updateRotation(speed: standardSpeed / celestialObj.rotationSpeed)
+        await celestialEntity.updateOrbit(speed: standardSpeed / celestialObj.orbitalSpeed)
+        for child in celestialObj.satellites {
+            await updateCelestialMovements(in: celestialEntity, for: child, standardSpeed: standardSpeed)
+        }
+    }
 }
