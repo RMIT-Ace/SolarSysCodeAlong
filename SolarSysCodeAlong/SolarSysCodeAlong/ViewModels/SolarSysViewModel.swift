@@ -36,6 +36,13 @@ class SolarSysViewModel {
                         )
                     ]
                 ),
+                CelestialObject(
+                    name: "Mars",
+                    scale: 0.9,
+                    distanceCenter: 1.8,
+                    rotationSpeed: 2.0,
+                    orbitalSpeed: 8.0
+                )
             ]
         )
     ]
