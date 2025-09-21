@@ -4,6 +4,21 @@
 //
 //  Created by Ace on 15/9/2025.
 //
+//  Notes:
+//  (1) Remove all codes from previous exercise, except skybox code.
+//  (2) Refactor code that creates skybox into a resuable function.
+//  (2a) Call skybox function to create skybox for our code.
+//  (3) Create entities
+//  (3a) Big blue box entity
+//  (3b) Earth entity
+//  (4) Adding Component and System - see:
+//  (4a) RotationComponent and
+//  (4b) RotationSystem
+//  (5) Make entity rotates
+//  (5a) Make blue box rotates
+//  (5b) Make Earth rotates
+//  (5c) Make Sun rotates
+//
 
 import SwiftUI
 import RealityKit
@@ -18,8 +33,12 @@ struct SolarSysCodeAlongView: View {
         RealityView { content in
             content.camera = .spatialTracking
             
+            // (1) Exercise setup
+            
+            // (2a) _solarcallskyboxfunc
             await makeSkybox(content)
             
+            // (3a) _solarbigbluebox
             let box = ModelEntity(
                 mesh: .generateBox(size: boxSize),
                 materials: [
@@ -30,18 +49,19 @@ struct SolarSysCodeAlongView: View {
             )
             box.transform = Transform(translation: SIMD3(0, 0, depth))
             content.add(box)
+            
+            // (5a) _solarblueboxrotate
             box.components.set( RotationComponent(rotationSpeed: 1) )
             
-            // 3D Model - Earth
+            // (3b) _solarblueboxearth
             if let url = SolarSysRealityKitResources.bundle.url(forResource: "Earth", withExtension: "usdz"),
                let earth = try? await ModelEntity(contentsOf: url) {
                 box.addChild(earth)
                 earth.position.x = boxSize / 2.0
-                earth.components.set(
-                    RotationComponent(rotationSpeed: 20.0)
-                )
+                // (5b) _solarblueboxearthrotate
+                earth.components.set( RotationComponent(rotationSpeed: 20.0) )
                 
-                // 3D Model - Moon
+                // (3c) _solarblueboxearthmoon
                 if let url = SolarSysRealityKitResources.bundle.url(forResource: "Moon", withExtension: "usdz"),
                    let moon = try? await ModelEntity(contentsOf: url) {
                     box.addChild(moon)
@@ -51,25 +71,26 @@ struct SolarSysCodeAlongView: View {
                 }
             }
             
-            // 3D Model - Sun
+            // (3d) _solarblueboxsun
             if let url = SolarSysRealityKitResources.bundle.url(forResource: "Sun", withExtension: "usdz"),
                let sun = try? await ModelEntity(contentsOf: url) {
-//                box.addChild(sun)
                 content.add(sun)
                 sun.transform = Transform(translation: SIMD3(0, 0, depth))
                 sun.scale = SIMD3(repeating: 4)
+                // (5c) _solarblueboxsunrotate
                 sun.components.set(
-                    // Speed of 1 will make it stands still. Must offset the speed of box.
                     RotationComponent(rotationSpeed: 1.0, rotationAxis: [0, -1, 0])
                 )
             }
-
         }
+        // (4c) _solarregisterrotation
         .onAppear {
             RotationSystem.registerSystem()
         }
         .ignoresSafeArea()
     }
+    
+    // (2) _solarskyboxfunc
     
     private func makeSkybox(_ content: RealityViewCameraContent) async {
         // Skybox
