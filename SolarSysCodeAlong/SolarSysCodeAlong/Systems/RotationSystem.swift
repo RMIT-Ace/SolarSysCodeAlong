@@ -8,6 +8,7 @@
 import Foundation
 import RealityKit
 
+// (4b)
 struct RotationSystem: System {
     static let query = EntityQuery(where: .has(RotationComponent.self))
     
