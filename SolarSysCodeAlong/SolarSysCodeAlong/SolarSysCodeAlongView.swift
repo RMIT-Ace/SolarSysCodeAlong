@@ -36,73 +36,22 @@ struct SolarSysCodeAlongView: View {
             // (1) Exercise setup
             
             // (2a) _solarcallskyboxfunc
-            await makeSkybox(content)
             
             // (3a) _solarbigbluebox
-            let box = ModelEntity(
-                mesh: .generateBox(size: boxSize),
-                materials: [
-                    SimpleMaterial(
-                        color: .blue.withAlphaComponent(0.2), isMetallic: false
-                    )
-                ]
-            )
-            box.transform = Transform(translation: SIMD3(0, 0, depth))
-            content.add(box)
             
             // (5a) _solarblueboxrotate
-            box.components.set( RotationComponent(rotationSpeed: 1) )
             
             // (3b) _solarblueboxearth
-            if let url = SolarSysRealityKitResources.bundle.url(forResource: "Earth", withExtension: "usdz"),
-               let earth = try? await ModelEntity(contentsOf: url) {
-                box.addChild(earth)
-                earth.position.x = boxSize / 2.0
-                // (5b) _solarblueboxearthrotate
-                earth.components.set( RotationComponent(rotationSpeed: 20.0) )
-                
-                // (3c) _solarblueboxearthmoon
-                if let url = SolarSysRealityKitResources.bundle.url(forResource: "Moon", withExtension: "usdz"),
-                   let moon = try? await ModelEntity(contentsOf: url) {
-                    box.addChild(moon)
-                    moon.position.x = 0.3
-                    moon.scale = SIMD3(repeating: 0.3)
-                    earth.addChild(moon)
-                }
-            }
             
             // (3d) _solarblueboxsun
-            if let url = SolarSysRealityKitResources.bundle.url(forResource: "Sun", withExtension: "usdz"),
-               let sun = try? await ModelEntity(contentsOf: url) {
-                content.add(sun)
-                sun.transform = Transform(translation: SIMD3(0, 0, depth))
-                sun.scale = SIMD3(repeating: 4)
-                // (5c) _solarblueboxsunrotate
-                sun.components.set(
-                    RotationComponent(rotationSpeed: 1.0, rotationAxis: [0, -1, 0])
-                )
-            }
         }
         // (4c) _solarregisterrotation
-        .onAppear {
-            RotationSystem.registerSystem()
-        }
+        
         .ignoresSafeArea()
     }
     
     // (2) _solarskyboxfunc
     
-    private func makeSkybox(_ content: RealityViewCameraContent) async {
-        // Skybox
-        if let hapiLabTexture = try? await TextureResource(named: "starfield", in: SolarSysRealityKitResources.bundle) {
-            let mesh = MeshResource.generateSphere(radius: 10)
-            let material = UnlitMaterial(texture: hapiLabTexture)
-            let hapiSphere = ModelEntity(mesh: mesh, materials: [material])
-            hapiSphere.transform = Transform(translation: SIMD3(0, 0.5, depth))
-            content.add(hapiSphere)
-            hapiSphere.transform.scale = SIMD3(-1, 1, 1)
-        }
-    }
 }
 
 #Preview {
