@@ -25,7 +25,7 @@ struct SolarSysCodeAlongView: View {
         RealityView { content in
             content.camera = .spatialTracking
             
-            await makeSkybox(content)
+            content.add(await SkyboxEntity(.nebula))
 
             root = CelestialEntity()
             content.add(root)
@@ -47,17 +47,6 @@ struct SolarSysCodeAlongView: View {
             RotationSystem.registerSystem()
         }
         .ignoresSafeArea()
-    }
-    
-    private func makeSkybox(_ content: RealityViewCameraContent) async {
-        // Skybox
-        if let hapiLabTexture = try? await TextureResource(named: "starfield", in: SolarSysRealityKitResources.bundle) {
-            let mesh = MeshResource.generateSphere(radius: 10)
-            let material = UnlitMaterial(texture: hapiLabTexture)
-            let hapiSphere = ModelEntity(mesh: mesh, materials: [material])
-            content.add(hapiSphere)
-            hapiSphere.transform.scale = SIMD3(-1, 1, 1)
-        }
     }
 }
 
