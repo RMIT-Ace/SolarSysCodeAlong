@@ -29,60 +29,15 @@ struct SolarSysCodeAlongView: View {
             content.camera = .spatialTracking
             
             // (1) _solarsimplebox
-            let boxEntity = ModelEntity(
-                mesh: .generateBox( size: 0.25 ),
-                materials: [SimpleMaterial( color: .blue, isMetallic: true )]
-            )
-            boxEntity.transform = Transform(translation: SIMD3(0, 0, depth))
-            content.add(boxEntity)
             
             // (2) _solarsimplesphere
-            let sphereEntity = ModelEntity(
-                mesh: .generateSphere(radius: 0.25),
-                materials: [SimpleMaterial(color: .red, isMetallic: true)]
-            )
-            sphereEntity.transform = Transform(translation: SIMD3(1, 0, depth))
-            content.add(sphereEntity)
             
             // (3) _solarboxstar
-            let startfieldTexture = try? await TextureResource(
-                named: "starfield",
-                in: SolarSysRealityKitResources.bundle,
-            )
-            if startfieldTexture != nil {
-                let mesh = MeshResource.generateBox(size: 0.5)
-                let material = UnlitMaterial(texture: startfieldTexture!)
-                let boxWithStars = ModelEntity(mesh: mesh, materials: [material])
-                boxWithStars.transform = Transform(translation: SIMD3(-1, 0, depth))
-                content.add(boxWithStars)
-            } else {
-                print("DEBUG: Can't load starfield.")
-            }
-            
+           
             // (4) _solarsimpleskybox
-            if let hapiLabTexture = try? await TextureResource(
-                named: "puresky",
-                in: SolarSysRealityKitResources.bundle
-            ) {
-                let mesh = MeshResource.generateSphere(radius: 10)
-                let material = UnlitMaterial(texture: hapiLabTexture)
-                let hapiSphere = ModelEntity(mesh: mesh, materials: [material])
-                hapiSphere.transform = Transform(translation: SIMD3(0, 0.5, depth))
-                content.add(hapiSphere)
-                hapiSphere.transform.scale = SIMD3(-1, 1, 1)
-            }
-            
+           
             // (5) _solar3dmodel
-            if let url = SolarSysRealityKitResources.bundle.url(
-                forResource: "Earth",
-                withExtension: "usdz"
-            ),
-               let earth = try? await ModelEntity(contentsOf: url) {
-                earth.transform = Transform(translation: SIMD3(0, -0.5, depth))
-                content.add(earth)
-            } else {
-                print("DEBUG: Can't load Earth.")
-            }
+            
         }
         .ignoresSafeArea()
     }
