@@ -30,14 +30,7 @@ struct SolarSysCodeAlongView: View {
                 content.camera = .spatialTracking
                 
                 content.add(await SkyboxEntity(.nebula))
-                content.add(await CrosshairEntity { target, distance  in
-                    targetText = "\(target?.parent?.name ?? "")"
-                    if targetText.isEmpty {
-                        targetDistance = ""
-                    } else {
-                        targetDistance = String(format: "%0.2f m", distance)
-                    }
-                })
+                content.add(await CrosshairEntity(action: updateCrosshairDisplay))
                 
                 root = CelestialEntity()
                 content.add(root)
@@ -70,6 +63,15 @@ struct SolarSysCodeAlongView: View {
                     .foregroundStyle(Color.white)
                 Spacer()
             }
+        }
+    }
+    
+    private func updateCrosshairDisplay(target: Entity?, distance: Float) {
+        targetText = "\(target?.parent?.name ?? "")"
+        if targetText.isEmpty {
+            targetDistance = ""
+        } else {
+            targetDistance = String(format: "%0.2f m", distance)
         }
     }
 }
