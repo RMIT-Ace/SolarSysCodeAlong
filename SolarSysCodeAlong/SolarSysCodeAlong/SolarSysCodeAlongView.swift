@@ -11,9 +11,12 @@
 //  (3) Create entities
 //  (3a) Big blue box entity
 //  (3b) Earth entity
+//  (3c) Moon entity
+//  (3d) Sun entity
 //  (4) Adding Component and System - see:
 //  (4a) RotationComponent and
 //  (4b) RotationSystem
+//  (4c) Register Rotation System
 //  (5) Make entity rotates
 //  (5a) Make blue box rotates
 //  (5b) Make Earth rotates
