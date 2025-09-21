@@ -7,6 +7,7 @@
 
 import Foundation
 import RealityKit
+import SolarSysRealityKit
 
 /// Represent planets or stars. A body that rotates around itself and
 /// orbits around its parent (i.e. Sun).
@@ -37,6 +38,7 @@ class CelestialEntity: Entity {
             scale: SIMD3(repeating: scale),
             translation: .init(x: distanceFromCenter, y: 0, z: 0)
         )
+        CrosshairEntity.enableCrosshairDection(for: celestialObj)
         super.addChild(celestialObj)
         
         // For adding children. No Visual appearance..

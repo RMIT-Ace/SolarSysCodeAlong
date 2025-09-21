@@ -31,8 +31,8 @@ class SolarSysViewModel {
                             name: "Moon",
                             scale: 1.0 / 2.0,
                             distanceCenter: 0.2,
-                            rotationSpeed: 2.0,
-                            orbitalSpeed: 1.0,
+                            rotationSpeed: 0.5,
+                            orbitalSpeed: 2.5,
                         )
                     ]
                 ),
@@ -42,6 +42,13 @@ class SolarSysViewModel {
                     distanceCenter: 1.8,
                     rotationSpeed: 2.0,
                     orbitalSpeed: 8.0
+                ),
+                CelestialObject(
+                    name: "Jupiter",
+                    scale: 3.0,
+                    distanceCenter: 4.0,
+                    rotationSpeed: 2.0,
+                    orbitalSpeed: 10.0
                 )
             ]
         )
