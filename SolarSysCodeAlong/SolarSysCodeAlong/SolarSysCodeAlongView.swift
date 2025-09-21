@@ -26,7 +26,7 @@ struct SolarSysCodeAlongView: View {
             content.camera = .spatialTracking
             
             await makeSkybox(content)
-            
+
             root = CelestialEntity()
             content.add(root)
             root.position.z = -1.0
