@@ -9,6 +9,11 @@
 //  (2) SwiftUI component - RealityView
 //  (3) Camera tracking - mapping virtual entities into realworld.
 //  (4) Expand our view on entire display areas.
+//
+//  Exercises:
+//  (E1) Build and deploy to device
+//  (E2) Comment out camera tracking (3)
+//  (E3) Comment out ignore safe area (4)
 
 import SwiftUI
 import RealityKit
