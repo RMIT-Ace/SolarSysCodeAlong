@@ -4,6 +4,16 @@
 //
 //  Created by Ace on 15/9/2025.
 //
+//  Notes:
+//  (1) Discuss CrosshairEntity provided by SolarSysRealityKit package.
+//      Ray Cast detection - requires entity to be enable for collision.
+//  (2) Discuss Raycase function 'performRaycast()"
+//      Note how a callback function is used/called.
+//  (3) Adding crosshair entity
+//  (4) Explain SwiftUI components to overlay information.
+//  (5) Build and deploy to device.
+//
+
 
 import SwiftUI
 import RealityKit
@@ -30,6 +40,8 @@ struct SolarSysCodeAlongView: View {
                 content.camera = .spatialTracking
                 
                 content.add(await SkyboxEntity(.nebula))
+                
+                // (3) Adding crosshair entity
                 content.add(await CrosshairEntity { target, distance  in
                     targetText = "\(target?.parent?.name ?? "")"
                     if targetText.isEmpty {
