@@ -4,6 +4,8 @@
 //
 //  Created by Ace on 9/9/2025.
 //
+//  Notes:
+//  (3) Create a ViewModel 'SolarSysViewModel', see: SolarSysViewModel.swift
 
 import Foundation
 

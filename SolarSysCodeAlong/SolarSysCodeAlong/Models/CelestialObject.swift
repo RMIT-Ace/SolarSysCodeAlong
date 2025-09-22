@@ -4,6 +4,9 @@
 //
 //  Created by Ace on 9/9/2025.
 //
+//  Notes:
+//  (2) Create new type 'CelestialEntity' that hold necessary info for our celestial objects.
+//      See: CelestialObject.swift. This file belongs to Model layer in MVVM
 
 import Foundation
 

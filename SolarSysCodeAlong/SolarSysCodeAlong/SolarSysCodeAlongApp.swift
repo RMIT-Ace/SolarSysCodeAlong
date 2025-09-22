@@ -12,7 +12,7 @@ struct SolarSysCodeAlongApp: App {
     var body: some Scene {
         WindowGroup {
             SolarSysCodeAlongView()
-                .environment(SolarSysViewModel())
+                .environment(SolarSysViewModel())   // (4c) Create an instance and pass it to the view
         }
     }
 }

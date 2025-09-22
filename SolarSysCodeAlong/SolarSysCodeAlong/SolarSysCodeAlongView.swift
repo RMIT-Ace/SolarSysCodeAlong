@@ -4,12 +4,21 @@
 //
 //  Created by Ace on 15/9/2025.
 //
+//  Notes:
+//  (1) Discuss repeating blocks of code everywhere. Introduce MVVM paradigm
+//  (2) Create new type 'CelestialEntity' that hold necessary info for our celestial objects.
+//      See: CelestialObject.swift. This file belongs to Model layer in MVVM
+//  (3) Create a ViewModel 'SolarSysViewModel', see: SolarSysViewModel.swift
+//  (4a) Passing a ViewModel into a view
+//  (4b) Create an instance and pass it to the view
+//  (4c) Create an instance and pass it to the view (SolarSysCodeAlongApp.swift)
 
 import SwiftUI
 import RealityKit
 import SolarSysRealityKit
 
 struct SolarSysCodeAlongView: View {
+    // (4a) Requires a ViewModel to work with.
     @Environment(SolarSysViewModel.self) private var vm
     
     static let secondsInOneEarthRotation: Float = .pi * 2.0
@@ -93,5 +102,5 @@ struct SolarSysCodeAlongView: View {
 
 #Preview {
     SolarSysCodeAlongView()
-        .environment(SolarSysViewModel())
+        .environment(SolarSysViewModel())   // (4b) Create an instance and pass it to the view
 }
