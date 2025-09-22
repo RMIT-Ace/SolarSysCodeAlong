@@ -4,6 +4,17 @@
 //
 //  Created by Ace on 15/9/2025.
 //
+//  Notes:
+//  (1) Discuss repeating blocks of code everywhere. Introduce MVVM paradigm
+//  (2) Create new type 'CelestialEntity' that hold necessary info for our celestial objects.
+//      See: CelestialObject.swift. This file belongs to Model layer in MVVM
+//  (3) Create a ViewModel 'SolarSysViewModel', see: SolarSysViewModel.swift
+//  (4a) Passing a ViewModel into a view
+//  (4b) Create an instance and pass it to the view
+//  (4c) Create an instance and pass it to the view (SolarSysCodeAlongApp.swift)
+//
+//  (5) Define a function to setup celestial system - addCelestialEntity()
+//  (5a) Calling the function to setup solar system.
 
 import SwiftUI
 import RealityKit
@@ -34,6 +45,7 @@ struct SolarSysCodeAlongView: View {
             content.add(root)
             root.position.z = -1.0
             
+            // (5a) Calling the function to setup solar system.
             await addCelestialEntity(
                 to: root,
                 celestialObj: vm.celestialObjects.first
