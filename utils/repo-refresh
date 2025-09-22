@@ -1,0 +1,18 @@
+#!/bin/bash
+
+git stash save; git checkout 00-Start; git pull --prune
+git stash save; git checkout 01-BasicEntity; git pull --prune
+git stash save; git checkout 01-BasicEntity1; git pull --prune
+git stash save; git checkout 02-ECS; git pull --prune
+git stash save; git checkout 02-ECS1; git pull --prune
+git stash save; git checkout 03-CustomEntity; git pull --prune
+git stash save; git checkout 03-CustomEntity1; git pull --prune
+git stash save; git checkout 04-mvvm; git pull --prune
+git stash save; git checkout 04-mvvm1; git pull --prune
+git stash save; git checkout 04-mvvm2; git pull --prune
+git stash save; git checkout 04-mvvm3; git pull --prune
+git stash save; git checkout 05-SwiftPackage; git pull --prune
+git stash save; git checkout 05-SwiftPackage1; git pull --prune
+git stash save; git checkout 05-SwiftPackage2; git pull --prune
+git stash save; git checkout 05-SwiftPackage3; git pull --prune
+git stash save; git checkout 00-Start; git pull --prune
