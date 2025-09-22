@@ -4,6 +4,11 @@
 //
 //  Created by Ace on 9/9/2025.
 //
+//  Notes:
+//  (8) Refactor functions into ViewModel - See 'SolarSysViewModel.swift'
+//
+//  Exercise:
+//  (8b) Exercise - Adding Mars planet
 
 import Foundation
 import RealityKit
@@ -36,13 +41,7 @@ class SolarSysViewModel {
                         )
                     ]
                 ),
-                CelestialObject(
-                    name: "Mars",
-                    scale: 0.9,
-                    distanceCenter: 1.8,
-                    rotationSpeed: 2.0,
-                    orbitalSpeed: 8.0
-                )
+                // (8b) _solarvmmars
             ]
         )
     ]
