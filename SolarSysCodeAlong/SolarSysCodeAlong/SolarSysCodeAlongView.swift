@@ -46,52 +46,14 @@ struct SolarSysCodeAlongView: View {
             await makeSkybox(content)
             
             // (3) _solarroot
-            root = Entity()
-            content.add(root)
-            root.position.z = -1.0
             
             // (4) _solarcesun
-            // 3D Model - Sun
-            sun = await CelestialEntity(
-                bundle: SolarSysRealityKitResources.bundle,
-                name: "Sun",
-                scale: 3.0,
-                distanceFromCenter: 0.0)
-            if let sun = sun {
-                root.addChild(sun)
-            }
-
+            
             // (5) _solarceearth
-            // 3D Model - Earth
-            earth = await CelestialEntity(
-                bundle: SolarSysRealityKitResources.bundle,
-                name: "Earth",
-                scale: 1.0,
-                distanceFromCenter: 1.0)
-            if let earth = earth, let sun = sun {
-                sun.addChild(earth)
-            }
             
             // (6) _solarcemoon
-            // 3D Model - Moon
-            moon = await CelestialEntity(
-                bundle: SolarSysRealityKitResources.bundle,
-                name: "Moon",
-                scale: 1.0 / 2.0,
-                distanceFromCenter: 0.2)
-            if let earth = earth, let moon = moon {
-                earth.addChild(moon)
-            }
 
         // (7) _solarrealityupdate
-        } update: { content in
-            Task {
-                await sun?.updateRotation(speed: standardSpeed / 27.0)  // 27 Earth-day
-                await earth?.updateRotation(speed: standardSpeed / 1.0) // One day
-                await earth?.updateOrbit(speed: standardSpeed / 10)     // 10 days
-                await moon?.updateRotation(speed: standardSpeed / 2.0) // One day
-                await moon?.updateOrbit(speed: standardSpeed / 10)     // 10 days
-            }
         }
         .onAppear {
             RotationSystem.registerSystem()
