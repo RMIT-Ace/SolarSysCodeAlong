@@ -4,6 +4,15 @@
 //
 //  Created by Ace on 15/9/2025.
 //
+//  Notes:
+//  (1) Notice skybox function is useful and can be reused elsewhere.
+//  (2) Refactor Skybox and put it in a package SolarSysRealityKit.
+//      Walkthrough the code.
+//  (3) Simply (re)use skybox code provided by the package.
+//
+//  Exercises:
+//  (4) Experiment with different skyboxes.
+//
 
 import SwiftUI
 import RealityKit
@@ -25,6 +34,7 @@ struct SolarSysCodeAlongView: View {
         RealityView { content in
             content.camera = .spatialTracking
             
+            // (3) Reuse code from SolarSysRealityKit package.
             content.add(await SkyboxEntity(.nebula))
 
             root = CelestialEntity()
