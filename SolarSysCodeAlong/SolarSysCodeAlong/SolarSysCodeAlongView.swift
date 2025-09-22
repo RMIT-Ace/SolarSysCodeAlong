@@ -18,6 +18,7 @@
 //
 //  (6) Refactor update movements code into a function
 //  (6a) Calling update movement function
+//  (7) Point out that View is not a good place for these 2 functions!
 
 
 import SwiftUI
