@@ -4,7 +4,7 @@
 //
 //  Created by Ace on 15/9/2025.
 //
-g//  Notes:
+//  Notes:
 //  (1) Discuss repeating blocks of code everywhere. Introduce MVVM paradigm
 //  (2) Create new type 'CelestialEntity' that hold necessary info for our celestial objects.
 //      See: CelestialObject.swift. This file belongs to Model layer in MVVM
