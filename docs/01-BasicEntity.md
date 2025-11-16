@@ -2,6 +2,14 @@
 
 ![](res/01-basic-entity.png)
 
+# Source Repository, Github, and Branches
+
+👉 [Source Repository](https://github.com/RMIT-Ace/SolarSysCodeAlong)
+
+This code-along comes with many exercises. Each exercise has a starting point, and its next milestone steps - each in its own 'branch'. For example, for our first exercise, 01-BasicEntity, you will see a branch '01-BasicEntity', then, '01-BasicEntity1' and so on.
+
+You are free to navigate and explore these exercises the way you like. For the curious ones, you can switch to the end milestone of each exercise, build and deploy, play with it, then walk throught the source code. Or, if you are feeling brave, you can swith to the beginning branch and try to code your way to the solution.
+
 # Setup
 
 First off, this code-along will be much more fun if you run this app on the actual iPhone. With this, you will be able to walk around and inspect your 3D models, and etc.
@@ -20,11 +28,6 @@ Your app will access camera for 3D spatial tracking. This allows you to place 3D
 Apple asks that you must inform this to the users and get their permission first. 
 
 ![](res/xcode-privacy-usage.png)
-
-# Github Branches
-This code-along comes with many exercises. Each exercise has a starting point, and its next milestone steps - each in its own 'branch'. For example, for our first exercise, 01-BasicEntity, you will see a branch '01-BasicEntity', then, '01-BasicEntity1' and so on.
-
-You are free to navigate and explore these exercises the way you like. For the curious ones, you can switch to the end milestone of each exercise, build and deploy, play with it, then walk throught the source code. Or, if you are feeling brave, you can swith to the beginning branch and try to code your way to the solution.
 
 # Test Run
 Just as this is our first exercise, let's test building and running on the actual iPhone.
