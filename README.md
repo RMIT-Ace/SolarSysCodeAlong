@@ -36,7 +36,7 @@ Immersive Programming Code-Along presentation using SolarSys as example.
 
 ## Blogs
 
-1. [Code Along Setup & Basic Components of RealityKit - November 2025](docs/01-BasicEntity.md)
+1. [Code Along Setup & Basic Components of RealityKit - November 2025](https://rmit-ace.github.io/SolarSysCodeAlong/docs/01-BasicEntity)
 
 ## Source Codes
 
