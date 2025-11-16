@@ -34,6 +34,10 @@ Immersive Programming Code-Along presentation using SolarSys as example.
 | 04-mvvm | Model, View, ViewModel |
 | 05-SwiftPackage | Uses of 3rd-party Swift Package (Skybox, Ray Casting, etc) |
 
+## Blogs
+
+1. [Code Along Setup & Basic Components of RealityKit - November 2025](docs/01-BasicEntity.md)
+
 ## Source Codes
 
 1. https://github.com/RMIT-Ace/SolarSysCodeAlong
