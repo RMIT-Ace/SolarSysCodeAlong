@@ -6,7 +6,7 @@
 
 In this post, we continue from the previous week. We will look at the basic component that makes an object visible in spatial view - the Entity component.
 
-If you arrived here accidentally and wondered where the source code for this exercise is:
+If you arrived here and wondered where the source code for this exercise, here it is:
 
 `https://github.com/RMIT-Ace/SolarSysCodeAlong`
 
