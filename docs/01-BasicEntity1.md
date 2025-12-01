@@ -4,13 +4,13 @@
 
 # Source Branches
 
+In this post, we continue from the previous week. We will look at the basic component that make an object visible in spatial view - the Entity component.
+
 If you arrived here accidentally and wondered where the source code for this exercise is:
 
 `https://github.com/RMIT-Ace/SolarSysCodeAlong`
 
-In this post, we continue from the previous week. We will look at the basic component that make an object visible in spatial view - the Entity component.
-
-For this week, our code comes from these two git branches:
+For this week, we will walkthrough code comes from these two git branches:
 
 - `01-BasicEntity`, and
 - `01-BasicEntity1`
