@@ -39,6 +39,7 @@ Immersive Programming Code-Along presentation using SolarSys as example.
 1. [Code Along: Setup & Basic Components of RealityKit - November 2025](https://rmit-ace.github.io/SolarSysCodeAlong/docs/01-BasicEntity)
 1. [Code Along: Basic Entiy Code Walkthrough - 2 December 2025](https://rmit-ace.github.io/SolarSysCodeAlong/docs/01-BasicEntity1)
 1. [Code Along: ECS & Sky Dome - 9 December 2025](https://rmit-ace.github.io/SolarSysCodeAlong/docs/02-ECS)
+1. [Code Along: Not Using ECS - 6 January 2026](https://rmit-ace.github.io/SolarSysCodeAlong/docs/02-NotUsingECS)
 
 ## Source Codes
 
