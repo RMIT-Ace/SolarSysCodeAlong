@@ -109,3 +109,9 @@ But!
 # Code Smell!
 
 My spidey sense is tingling! The app is running, but I’m not quite feeling it. The code looks like it’s trying to juggle entity, logic and data in a bit of a mess. Can you picture if we had heaps of different entities, each needing its own special animation style? That would mean we’d need extra state variables and animation rules for each one. How do we make sure our `foreverRunloop()` runs smoothly, even when the CPU is under the weather? And, worst case scenario, animating big, complicated objects would make our update routine super complicated and hard to understand and reuse.
+
+In our next post, we’ll explore how ECS can assist us.
+
+Until then, "Stay hungry, Stay Foolish" -- Steve Jobs,
+
+Ace
