@@ -15,7 +15,7 @@ import SolarSysRealityKit
 struct SolarSysCodeAlongView: View {
     
     let depth: Float = -3.0
-    let boxSize: Float = 2.0
+    let boxSize: Float = 1.0
     
     @State private var redBoxRotation: simd_quatf = .init()
     
@@ -27,7 +27,7 @@ struct SolarSysCodeAlongView: View {
                 mesh: .generateBox(size: boxSize),
                 materials: [
                     SimpleMaterial(
-                        color: .red.withAlphaComponent(0.2), isMetallic: false
+                        color: .red.withAlphaComponent(0.8), isMetallic: true
                     )
                 ]
             )
