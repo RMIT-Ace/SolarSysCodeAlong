@@ -1,5 +1,7 @@
 # RealityKit Code Along - Animation without ECS
 
+![](res/redbox.gif)
+
 # Source Branches
 
 `https://github.com/RMIT-Ace/SolarSysCodeAlong`
