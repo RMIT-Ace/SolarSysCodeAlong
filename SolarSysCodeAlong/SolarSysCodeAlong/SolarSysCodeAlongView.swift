@@ -14,46 +14,42 @@ import SolarSysRealityKit
 
 struct SolarSysCodeAlongView: View {
     
-    let depth: Float = -3.0
-    let boxSize: Float = 1.0
-    
-    @State private var redBoxRotation: simd_quatf = .init()
+    let depth: Float = -2.0
+    let boxSize: Float = 0.5
+    let verticalSpacing: Float = 0.2
     
     var body: some View {
         RealityView { content in
             content.camera = .spatialTracking
             
-            let redBox = ModelEntity(
-                mesh: .generateBox(size: boxSize),
-                materials: [
-                    SimpleMaterial(
-                        color: .red.withAlphaComponent(0.8), isMetallic: true
-                    )
-                ]
-            )
-            redBox.name = "RedBox"
-            redBox.transform = Transform(translation: SIMD3(0, 0, depth))
+            let blueBox = makeBoxEntity(name: "BlueBox", color: .blue, position: [0, 0, depth])
+            let redBox = makeBoxEntity(name: "Redbox", color: .red, position: [boxSize + verticalSpacing, 0, depth])
+            let greenBox = makeBoxEntity(name: "GreenBox", color: .green, position: [-(boxSize +  verticalSpacing), 0, depth])
+            
+            content.add(blueBox)
             content.add(redBox)
-            self.redBoxRotation = redBox.transform.rotation
-        } update: { content in
-            if let redBox = content.entities.first(where: {$0.name == "RedBox"}) {
-                redBox.transform.rotation = redBoxRotation
-            }
-        }
-        .task {
-            await foreverRunloop()
+            content.add(greenBox)
+            
+            blueBox.components.set(RotationComponent(rotationSpeed: 10.0, rotationAxis: [0, -1, 0]))
+            redBox.components.set(RotationComponent(rotationSpeed: 1.0, rotationAxis: [0, 1, 0]))
+            greenBox.components.set(RotationComponent(rotationSpeed: 5.0, rotationAxis: [1, 0, 0]))
         }
         .ignoresSafeArea()
-    }
-    
-    // Animation-loop without using ECS
-    private func foreverRunloop() async {
-        let angle: Float = 5 * .pi / 180
-        while true {
-            try? await Task.sleep(for: .milliseconds(100))
-            redBoxRotation *= simd_quatf(angle: angle, axis: [0, 1, 0])
+        .onAppear(){
+            RotationSystem.registerSystem()
         }
     }
+    
+    private func makeBoxEntity(name: String, color: UIColor, position: SIMD3<Float>) -> ModelEntity {
+        let boxEntity = ModelEntity(
+            mesh: .generateBox(size: boxSize),
+            materials: [SimpleMaterial(color: color, isMetallic: true)]
+        )
+        boxEntity.name = name
+        boxEntity.transform = Transform(translation: position)
+        return boxEntity
+    }
+    
 }
 
 #Preview {
