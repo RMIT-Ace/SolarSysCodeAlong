@@ -1,8 +1,8 @@
 # RealityKit Code Along - Animation with ECS
 
-![](res/redbox.gif)
+![](res/spinning-boxes.gif)
 
-In this post, we continue with implementing 3D animation with RealityKit. This time we look at the suggested framework - using Entity, Component, and System.
+In this post, we’re continuing to implement 3D animation with RealityKit. This time we’ll explore the suggested framework using Entity, Component and System.
 
 # Source Branches
 
@@ -12,9 +12,9 @@ In this post, we will be working on these branches:
 
 - `02-ECS1`
 
-# Component
+# ECS - Component
 
-In RealityKit, components store information for entities.  We can use a component to manage per-entity state systems depend on.  For instance, we’ll use a component to store rotational operation details for each entity including its rotation speed and axis of revolution.
+In RealityKit, components store information for entities.  We can use a component to manage per-entity state that systems can use.  For instance, we’ll use a component to store rotational operation details (rotation speed and axis of revolution)l for each entity.
 
 ```swift
 struct RotationComponent: Component {
@@ -23,7 +23,7 @@ struct RotationComponent: Component {
 }
 ```
 
-# System
+# ECS - System
 
 In RealityKit, a system represents a continuous operation affecting multiple entities.  Its code is executed on every scene’s update.  RealityKit calls the system’s update function as often as specified by the `updatingSystemWhen` parameter in the `entities(matching:updatingSystemWhen:)` function. This eliminates the need to set up and manage the `runloop` for updating animations.
 
@@ -115,4 +115,8 @@ var body: some View {
         .onAppear(){
             RotationSystem.registerSystem()
         }
+}
 ```
+
+View the complete source code from the GitHub branch `02-ECS1`.  Build and run it on your device to see how easily each code component can be reused. For example, you can create three boxes and make them rotate independently.
+
