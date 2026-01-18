@@ -28,12 +28,12 @@ import SolarSysRealityKit
 
 struct SolarSysCodeAlongView: View {
     
-    let depth: Float = -4.0
+    let depth: Float = -2.0
     let boxSize: Float = 2.0
     
     var body: some View {
         RealityView { content in
-            content.camera = .spatialTracking
+//            content.camera = .spatialTracking
             
             // (1) Exercise setup
             
