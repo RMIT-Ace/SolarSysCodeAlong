@@ -28,7 +28,7 @@ import SolarSysRealityKit
 
 struct SolarSysCodeAlongView: View {
     
-    let depth: Float = -3.0
+    let depth: Float = -4.0
     let boxSize: Float = 2.0
     
     var body: some View {
@@ -109,12 +109,11 @@ struct SolarSysCodeAlongView: View {
             named: "starfield",
             in: SolarSysRealityKitResources.bundle
         ) {
-            let mesh = MeshResource.generateSphere(radius: 10)
+            let mesh = MeshResource.generateSphere(radius: 20)
             let material = UnlitMaterial(texture: hapiLabTexture)
             let hapiSphere = ModelEntity(mesh: mesh, materials: [material])
-            hapiSphere.transform = Transform(translation: SIMD3(0, 0.5, depth))
-            content.add(hapiSphere)
             hapiSphere.transform.scale = SIMD3(-1, 1, 1)
+            content.add(hapiSphere)
         }
     }
     
