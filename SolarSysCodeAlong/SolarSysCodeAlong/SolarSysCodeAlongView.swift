@@ -39,59 +39,56 @@ struct SolarSysCodeAlongView: View {
             if let url = SolarSysRealityKitResources.bundle.url(
                 forResource: "Sun",
                 withExtension: "usdz"
-            ),
-               let sun = try? await ModelEntity(contentsOf: url) {
-                content.add(sun)
-                sun.transform = Transform(translation: SIMD3(0, 0, depth))
-                sun.scale = SIMD3(repeating: 4)
-                sun.components.set(
-                    RotationComponent(rotationSpeed: 1.0, rotationAxis: [0, -1, 0])
-                )
-                
-                if let url = SolarSysRealityKitResources.bundle.url(
-                    forResource: "Earth",
-                    withExtension: "usdz"
-                ),
-                   let earth = try? await ModelEntity(contentsOf: url) {
-                    sun.addChild(earth)
-                    earth.position.x = boxSize / 2.0
-                    earth.components.set( RotationComponent(rotationSpeed: 5.0) )
-                    
+            ) {
+                if let sun = try? await ModelEntity(contentsOf: url) {
+                    content.add(sun)
+                    sun.transform = Transform(translation: SIMD3(0, 0, depth))
+                    sun.scale = SIMD3(repeating: 4)
+                    sun.components.set(
+                        RotationComponent(rotationSpeed: 1.0, rotationAxis: [0, -1, 0])
+                    )
                     if let url = SolarSysRealityKitResources.bundle.url(
-                        forResource: "Moon",
+                        forResource: "Earth",
                         withExtension: "usdz"
-                    ),
-                       let moon = try? await ModelEntity(contentsOf: url) {
-                        moon.position.x = 0.3
-                        moon.scale = SIMD3(repeating: 0.3)
-                        earth.addChild(moon)
+                    ) {
+                        if let earth = try? await ModelEntity(contentsOf: url) {
+                            sun.addChild(earth)
+                            earth.position.x = boxSize / 2.0
+                            earth.components.set( RotationComponent(rotationSpeed: 5.0) )
+                            
+                            if let url = SolarSysRealityKitResources.bundle.url(
+                                forResource: "Moon",
+                                withExtension: "usdz"
+                            ) {
+                                if let moon = try? await ModelEntity(contentsOf: url) {
+                                    moon.position.x = 0.3
+                                    moon.scale = SIMD3(repeating: 0.3)
+                                    earth.addChild(moon)
+                                }
+                            }
+                        }
                     }
                 }
             }
-
-            
         }
-        .onAppear {
-            RotationSystem.registerSystem()
-        }
-        
+        .onAppear { RotationSystem.registerSystem() }
         .ignoresSafeArea()
+}
+
+private func makeSkybox(_ content: RealityViewCameraContent) async {
+    // Skybox
+    if let hapiLabTexture = try? await TextureResource(
+        named: "starfield",
+        in: SolarSysRealityKitResources.bundle
+    ) {
+        let mesh = MeshResource.generateSphere(radius: 20)
+        let material = UnlitMaterial(texture: hapiLabTexture)
+        let hapiSphere = ModelEntity(mesh: mesh, materials: [material])
+        hapiSphere.transform.scale = SIMD3(-1, 1, 1)
+        content.add(hapiSphere)
     }
-    
-    private func makeSkybox(_ content: RealityViewCameraContent) async {
-        // Skybox
-        if let hapiLabTexture = try? await TextureResource(
-            named: "starfield",
-            in: SolarSysRealityKitResources.bundle
-        ) {
-            let mesh = MeshResource.generateSphere(radius: 20)
-            let material = UnlitMaterial(texture: hapiLabTexture)
-            let hapiSphere = ModelEntity(mesh: mesh, materials: [material])
-            hapiSphere.transform.scale = SIMD3(-1, 1, 1)
-            content.add(hapiSphere)
-        }
-    }
-    
+}
+
 }
 
 #Preview {
