@@ -1,5 +1,6 @@
 # RealityKit Code Along - Create Heavenly Objects
 
+![](res/SunEarthMoon.gif)
 
 # Source Branches
 
@@ -11,13 +12,21 @@ In this post, we will be working on these branches:
 
 # SolarSysRealityKit - A Swift Package
 
+This week, we’ll simulate objects and their behaviours within the Solar System.  Instead of manually searching for images, we’ll leverage the SolarSysRealityKit package, thanks to Swift Package Manager.
+
+`https://github.com/RMIT-Ace/SolarSysRealityKit`
+
+This package offers images of the Sun, Moon and Earth.  Here’s how to add a Swift package to our Xcode project.
+
 ![](res/xcode-add-package.png)
 
 ![](res/xcode-add-package-2.png)
 
-`https://github.com/RMIT-Ace/SolarSysRealityKit`
+To use this package in our souce code, we simply import it in.
 
-This allows us to use resources like images from this package. For example.
+`import SolarSysRealityKit`
+
+This enables us to utilise resources such as images from this package for example.
 
 ```swift
 if let url = SolarSysRealityKitResources.bundle.url( forResource: "Sun", withExtension: "usdz") {
@@ -27,11 +36,9 @@ if let url = SolarSysRealityKitResources.bundle.url( forResource: "Sun", withExt
     }
     ...
 }
-
-
 ```
 
-Creating Sun with rotation.
+Let’s create an entity to represent the Sun.  You’ll notice these codes are quite standard, having been learned from previous weeks.  To make the Sun rotate, we’ll reuse our `RotationComponent` from the last post.
 
 ```swift
 if let sun = try? await ModelEntity(contentsOf: url) {
@@ -44,7 +51,7 @@ if let sun = try? await ModelEntity(contentsOf: url) {
 }
 ```
 
-Create Earth.
+Creating an entity for Earth is possible using the same method. 
 
 ```swift
 if let url = SolarSysRealityKitResources.bundle.url( forResource: "Earth", withExtension: "usdz") {
@@ -56,7 +63,7 @@ if let url = SolarSysRealityKitResources.bundle.url( forResource: "Earth", withE
 }
 ```
 
-Add Earth to Sun.
+Adding Earth to the Sun is simply adding a child entity to the Sun entity.
 
 ```swift
     if let earth = try? await ModelEntity(contentsOf: url) {
@@ -66,6 +73,16 @@ Add Earth to Sun.
     }
 ```
 
-The complete source code is available from Github branch above. Build and run, you will see our heavenly object, the Sun, Earth, and the Moon rotating. How fascinating! 
+The complete source code is available on the Github branch above.  Build and run it to see our heavenly bodies – the Sun, Earth and Moon – rotating. It’s fascinating! 
 
-Notice that by adding Earth to Sun entity, Earth is not just rotating around itself, but also orbiting around the Sun. This effect also happens with the Moon.
+# Optical Illusion!
+
+When you add Earth to the Sun, it spins on its axis and also appears to orbit the Sun.  This orbital speed matches the Sun’s rotation speed, creating a simple optical illusion.  Forget about the Sun, Earth and Moon for a moment and consider this abstractly.  When you add an entity to its parent it becomes part of that parent.  Therefore, when a parent entity rotates all its parts rotate with it.
+
+What would happen if we wanted Earth to orbit the Sun independently at a different speed and/or direction?
+
+Hold on to that thought for now. We’ll address this behaviour in our next post.
+
+"The ultimate Answer to Life, the Universe and Everything is ... 42!" -- Douglas Adams.
+
+Ace
