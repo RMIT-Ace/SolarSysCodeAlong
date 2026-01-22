@@ -24,19 +24,18 @@ struct SolarSysCodeAlongView: View {
 
     var body: some View {
         RealityView { content in
-//            content.camera = .spatialTracking
             
             await makeSkybox(content)
             
             root = Entity()
             content.add(root)
-            root.position.z = -1.0
+            root.position.z = 0.4
             
             // 3D Model - Sun
             sun = await CelestialEntity(
                 bundle: SolarSysRealityKitResources.bundle,
                 name: "Sun",
-                scale: 3.0,
+                scale: 4.5,
                 distanceFromCenter: 0.0)
             if let sun = sun {
                 root.addChild(sun)
