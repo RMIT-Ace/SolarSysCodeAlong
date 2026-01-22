@@ -4,11 +4,6 @@
 //
 //  Created by Ace on 16/9/2025.
 //
-//  Notes:
-//  (2a) MainBody - Container for pivoting/orbiting.
-//  (2b) For adding children. No Visual appearance..
-//  (2c) Call the overridden 'addChild()'
-//  (2d) Overwrite 'addChild()'
 
 import Foundation
 import RealityKit
