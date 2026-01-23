@@ -42,6 +42,7 @@ Immersive Programming Code-Along presentation using SolarSys as example.
 1. [Code Along: Not Using ECS - 6 January 2026](https://rmit-ace.github.io/SolarSysCodeAlong/docs/02-NotUsingECS)
 1. [Code Along: Animation with ECS - 13 January 2026](https://rmit-ace.github.io/SolarSysCodeAlong/docs/02-AnimationUsingECS)
 1. [Code Along: Creating Heavenly Objects - 20 January 2026](https://rmit-ace.github.io/SolarSysCodeAlong/docs/02-HeavenlyObjects)
+1. [Code Along: Create Custom Entity - 27 January 2026](https://rmit-ace.github.io/SolarSysCodeAlong/docs/03-CustomEntity)
 
 ## Source Codes
 
