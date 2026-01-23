@@ -1,13 +1,15 @@
 # RealityKit Code Along - Custom Entity
 
-In our previous post, we learned how Entity, Component, and System (ECS) helps simplifying coding our immersive applications. However, we did see 2 problems: 
+![](res/custom-entity.gif)
 
-1. repetition of codes, and
-2. a child entity does not rotate independently of its parent rotation
+In our previous post, we explored how Entity, Component and System (ECS) simplifies coding immersive applications. However, we encountered two problems:
+
+1. Code repetition.
+2. A child entity’s rotation is dependent on its parent’s rotation.
 
 # DRY - Don't Repeat Yourself
 
-Creating multiple celestrial objects used similar repeating coding pattern. We will create a custom class that constructs and returns an entity that represents our celestrial body.
+To avoid code repetition, we create a custom class to represent celestial bodies within our universe.
 
 ```swift
 class CelestialEntity: Entity {
@@ -29,9 +31,7 @@ class CelestialEntity: Entity {
 }
 ```
 
-The first initialiser simply prevents us from calling it without specifying all the required arguments.
-
-We will use the second initialiser to create our solar objects. For example.
+The first initialiser prevents us from calling it without all the necessary arguments.  We’ll use the second initialiser to create our solar objects, for example.
 
 ```swift
 let sun = CelestrialEntity("Sun", distanceFromCenter: 0.0)      // Sun is at the center.
@@ -40,9 +40,9 @@ let earth = CelestrialEntity("Earth", distaneFromCenter: 1.0)   // i.e. 1 meter 
 
 # Double Bodies
 
-How to we solve our second problem? How can we rotate parent entity without causing child entities to be rotated along its parent?
+How can we solve our second problem?  Specifically, how do we rotate a parent entity without causing its child entities to rotate along with it?
 
-One way to implement this is to use double bodies. 
+One approach is to use double bodies. 
 
 ```
 - Celestrial Object
@@ -52,9 +52,7 @@ One way to implement this is to use double bodies.
     `- Rigid body - body with no appearance and does not spin
 ```
 
-We attach `RotationComponent` and materials to the `main body`.
-
-We attach any child satellite the `Rigid body`.
+We attach a `RotationComponent` and materials to the main body.  Then we attach any child satellites to the `Rigid body`.
 
 ```swift
 required init?(
@@ -89,7 +87,7 @@ required init?(
     }
 ```
 
-We need to modify `addChild()` function so that the child is attached to to right body.
+We need to modify the `addChild()` function so that the child is attached to the right body.
 
 ```swift
 func addChild(_ child: Entity) {
@@ -103,7 +101,7 @@ func addChild(_ child: Entity) {
 }
 ```
 
-There are 2 movements for our celestrial object, one is to rotate around itself, and another is to orbit around the center.
+Our celestial object has two movements: rotation around its own axis and orbit around a central point.
 
 ```swift
     func updateRotation(speed: Float) async {
@@ -138,7 +136,7 @@ if let sun = await CelestialEntity(name: "Sun", scale: 4.5, distanceFromCenter: 
 }
 ```
 
-And to make them rotate, we need to call `updateRotation()` and `updateOrbit()` for each object.
+To make the objects rotate we need to call `updateRotation()` and `updateOrbit()` for each one.
 
 ```swift
 var body: some View {
