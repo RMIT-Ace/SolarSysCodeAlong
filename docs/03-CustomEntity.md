@@ -161,7 +161,7 @@ By studying the full source code, building and deploying it to your device or si
 At this stage, you’ll have acquired sufficient knowledge to simulate our entire solar system including the Sun and its eight planets. I’ll leave this task for your curiosity and brevity.
 
 
-"Three things cannot long be hidden: the sun, the moon, and the truth" -- Lord Buddha.
+*"Three things cannot long be hidden: the sun, the moon, and the truth"* -- Lord Buddha.
 
 
 Ace
