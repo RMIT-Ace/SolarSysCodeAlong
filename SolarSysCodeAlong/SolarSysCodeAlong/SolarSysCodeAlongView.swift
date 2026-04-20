@@ -23,10 +23,19 @@ import SolarSysRealityKit       // (3a)
 
 struct SolarSysCodeAlongView: View {
     let depth: Float = -0.5     // (1a)
+    let trackingSession = SpatialTrackingSession()
     
     var body: some View {
         RealityView { content in
             content.camera = .spatialTracking
+
+            // Configure spatial tracking without occlusion so real-world objects don't interfere with skybox
+            let config = SpatialTrackingSession.Configuration(
+                tracking: [.camera, .world, .plane, .object, .image],
+                sceneUnderstanding: [.shadow, .collision, .physics],
+                camera: .back
+            )
+            await trackingSession.run(config)
             
             // (1) _solarsimplebox
             let boxEntity = ModelEntity(
@@ -64,7 +73,7 @@ struct SolarSysCodeAlongView: View {
                 named: "puresky",
                 in: SolarSysRealityKitResources.bundle
             ) {
-                let mesh = MeshResource.generateSphere(radius: 10)
+                let mesh = MeshResource.generateSphere(radius: 100)
                 let material = UnlitMaterial(texture: hapiLabTexture)
                 let hapiSphere = ModelEntity(mesh: mesh, materials: [material])
                 hapiSphere.transform = Transform(translation: SIMD3(0, 0.5, depth))
