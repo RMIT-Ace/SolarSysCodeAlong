@@ -29,7 +29,6 @@ struct SolarSysCodeAlongView: View {
         RealityView { content in
             content.camera = .spatialTracking
 
-            // Test from P38
             // Configure spatial tracking without occlusion so real-world objects don't interfere with skybox
             let config = SpatialTrackingSession.Configuration(
                 tracking: [.camera, .world, .plane, .object, .image],
