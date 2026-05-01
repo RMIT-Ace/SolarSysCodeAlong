@@ -5,8 +5,8 @@
 //  Created by Ace on 15/9/2025.
 //
 
-// Beginner-05
-// 1) Fully immersive with skybox!
+// Beginner-06
+// 1) Fully immersive on Vision Pro
 
 import SwiftUI
 import RealityKit
