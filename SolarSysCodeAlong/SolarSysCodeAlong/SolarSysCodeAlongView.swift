@@ -5,8 +5,8 @@
 //  Created by Ace on 15/9/2025.
 //
 
-// Beginner-03
-// 1) Programmatically create random sphere in the room
+// Beginner-04
+// 1) Make them move!
 
 import SwiftUI
 import RealityKit
@@ -24,6 +24,7 @@ struct SolarSysCodeAlongView: View {
                 )
             }
         }
+        .onAppear { RotationSystem.registerSystem() }
         .ignoresSafeArea()
     }
     
@@ -33,12 +34,16 @@ struct SolarSysCodeAlongView: View {
         color: SimpleMaterial.Color,
         position: SIMD3<Float>
     ) {
+        let centerEntity = Entity()
+        centerEntity.components.set(RotationComponent(rotationSpeed: getRandomRotationSpeed()))
+
         let sphere = ModelEntity(
             mesh: .generateSphere(radius: size / 2.0),
             materials: [SimpleMaterial(color: color, isMetallic: true)]
         )
         sphere.position = position
-        content.add(sphere)
+        centerEntity.addChild(sphere)
+        content.add(centerEntity)
     }
     
     func getRandomSize() -> Float {
@@ -55,6 +60,10 @@ struct SolarSysCodeAlongView: View {
             Float.random(in: -2.0...2.0),
             Float.random(in: -2.0...2.0),
         )
+    }
+    
+    func getRandomRotationSpeed() -> Float {
+        Float.random(in: 1.0...3.0)
     }
 }
 
