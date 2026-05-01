@@ -5,12 +5,8 @@
 //  Created by Ace on 15/9/2025.
 //
 
-// Beginner-01
-// 1) Put basic entity (sphere) in your real world.
-// 2) Create more spheres of various:
-//      - sizes
-//      - colors
-//      - position (x, y, z)
+// Beginner-02
+// 1) Create reusable function to add entity.
 
 import SwiftUI
 import RealityKit
@@ -20,24 +16,25 @@ struct SolarSysCodeAlongView: View {
         RealityView { content in
             content.camera = .spatialTracking
             
-            // Red sphere at center
-            let redSphereEntity = ModelEntity(
-                mesh: .generateSphere(radius: 0.25),
-                materials: [SimpleMaterial(color: .red, isMetallic: true)]
-            )
-            content.add(redSphereEntity)
+            addSphere(to: content, size: 0.1, color: .red, position: SIMD3(0, 0, 0))
             
-            // Blue sphere at center
-            let blueSphereEntity = ModelEntity(
-                mesh: .generateSphere(radius: 0.1),
-                materials: [SimpleMaterial(color: .blue, isMetallic: true)]
-            )
-            blueSphereEntity.position = SIMD3(0, 0, -1)
-            content.add(blueSphereEntity)
+            addSphere(to: content, size: 0.1, color: .blue, position: SIMD3(0, 0, -1))
         }
         .ignoresSafeArea()
-        
-        
+    }
+    
+    func addSphere(
+        to content: RealityViewCameraContent,
+        size: Float,
+        color: SimpleMaterial.Color,
+        position: SIMD3<Float>
+    ) {
+        let sphere = ModelEntity(
+            mesh: .generateSphere(radius: size / 2.0),
+            materials: [SimpleMaterial(color: color, isMetallic: true)]
+        )
+        sphere.position = position
+        content.add(sphere)
     }
 }
 
