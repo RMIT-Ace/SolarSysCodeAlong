@@ -5,11 +5,12 @@
 //  Created by Ace on 15/9/2025.
 //
 
-// Beginner-04
-// 1) Make them move!
+// Beginner-05
+// 1) Fully immersive with skybox!
 
 import SwiftUI
 import RealityKit
+import SolarSysRealityKit
 
 struct SolarSysCodeAlongView: View {
     let trackingSession = SpatialTrackingSession()
@@ -18,6 +19,8 @@ struct SolarSysCodeAlongView: View {
         RealityView { content in
             content.camera = .spatialTracking
             await setCameraTracking()
+            
+            await makeSkybox(content)
             
             for _ in 0..<10 {
                 addSphere(
@@ -77,6 +80,20 @@ struct SolarSysCodeAlongView: View {
     
     func getRandomRotationSpeed() -> Float {
         Float.random(in: 1.0...3.0)
+    }
+    
+    func makeSkybox(_ content: RealityViewCameraContent) async {
+        // Skybox
+        if let hapiLabTexture = try? await TextureResource(
+            named: "starfield",
+            in: SolarSysRealityKitResources.bundle
+        ) {
+            let mesh = MeshResource.generateSphere(radius: 20)
+            let material = UnlitMaterial(texture: hapiLabTexture)
+            let hapiSphere = ModelEntity(mesh: mesh, materials: [material])
+            hapiSphere.transform.scale = SIMD3(-1, 1, 1)
+            content.add(hapiSphere)
+        }
     }
 }
 
