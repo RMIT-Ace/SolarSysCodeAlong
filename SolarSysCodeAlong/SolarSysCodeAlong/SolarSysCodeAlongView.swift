@@ -12,9 +12,13 @@ import SwiftUI
 import RealityKit
 
 struct SolarSysCodeAlongView: View {
+    let trackingSession = SpatialTrackingSession()
+    
     var body: some View {
         RealityView { content in
             content.camera = .spatialTracking
+            await setCameraTracking()
+            
             for _ in 0..<10 {
                 addSphere(
                     to: content,
@@ -26,6 +30,15 @@ struct SolarSysCodeAlongView: View {
         }
         .onAppear { RotationSystem.registerSystem() }
         .ignoresSafeArea()
+    }
+    
+    func setCameraTracking() async {
+        let config = SpatialTrackingSession.Configuration(
+            tracking: [.camera, .world, .plane, .object, .image],
+            sceneUnderstanding: [.shadow, .collision, .physics],
+            camera: .back
+        )
+        await trackingSession.run(config)
     }
     
     func addSphere(
