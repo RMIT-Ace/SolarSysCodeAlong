@@ -2,7 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIApplication​Preferred​Default​Scene​Session​Role</key>
-	<string>UIWindow​Scene​Session​Role​Immersive​Space​Application</string>
+	<key>UIApplicationPreferredDefaultSceneSessionRole</key>
+	<string>UIWindowSceneSessionRoleImmersiveSpaceApplication</string>
 </dict>
 </plist>

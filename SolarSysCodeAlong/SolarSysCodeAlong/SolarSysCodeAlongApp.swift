@@ -12,9 +12,26 @@ struct SolarSysCodeAlongApp: App {
     @State private var immersionStyle: ImmersionStyle = .full
 
     var body: some Scene {
-        ImmersiveSpace {
+        WindowGroup {
+            LaunchView()
+        }
+        .windowStyle(.plain)
+
+        ImmersiveSpace(id: "solarSystem") {
             SolarSysCodeAlongView()
         }
         .immersionStyle(selection: $immersionStyle, in: .full)
+    }
+}
+
+struct LaunchView: View {
+    @Environment(\.openImmersiveSpace) private var openImmersiveSpace
+    @Environment(\.dismissWindow) private var dismissWindow
+
+    var body: some View {
+        Color.clear
+            .task {
+                await openImmersiveSpace(id: "solarSystem")
+            }
     }
 }
