@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct SolarSysCodeAlongApp: App {
+    @State private var immersionStyle: ImmersionStyle = .full
+
     var body: some Scene {
-        WindowGroup {
+        ImmersiveSpace {
             SolarSysCodeAlongView()
         }
+        .immersionStyle(selection: $immersionStyle, in: .full)
     }
 }

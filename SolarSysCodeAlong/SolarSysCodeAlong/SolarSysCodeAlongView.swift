@@ -10,18 +10,12 @@
 
 import SwiftUI
 import RealityKit
-import SolarSysRealityKit
 
 struct SolarSysCodeAlongView: View {
-    let trackingSession = SpatialTrackingSession()
-    
     var body: some View {
         RealityView { content in
-            content.camera = .spatialTracking
-            await setCameraTracking()
-            
             await makeSkybox(content)
-            
+
             for _ in 0..<10 {
                 addSphere(
                     to: content,
@@ -32,20 +26,10 @@ struct SolarSysCodeAlongView: View {
             }
         }
         .onAppear { RotationSystem.registerSystem() }
-        .ignoresSafeArea()
     }
-    
-    func setCameraTracking() async {
-        let config = SpatialTrackingSession.Configuration(
-            tracking: [.camera, .world, .plane, .object, .image],
-            sceneUnderstanding: [.shadow, .collision, .physics],
-            camera: .back
-        )
-        await trackingSession.run(config)
-    }
-    
+
     func addSphere(
-        to content: RealityViewCameraContent,
+        to content: RealityViewContent,
         size: Float,
         color: SimpleMaterial.Color,
         position: SIMD3<Float>
@@ -82,11 +66,10 @@ struct SolarSysCodeAlongView: View {
         Float.random(in: 1.0...3.0)
     }
     
-    func makeSkybox(_ content: RealityViewCameraContent) async {
+    func makeSkybox(_ content: RealityViewContent) async {
         // Skybox
         if let hapiLabTexture = try? await TextureResource(
-            named: "starfield",
-            in: SolarSysRealityKitResources.bundle
+            named: "starfield"
         ) {
             let mesh = MeshResource.generateSphere(radius: 20)
             let material = UnlitMaterial(texture: hapiLabTexture)
