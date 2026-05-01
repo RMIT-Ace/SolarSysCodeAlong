@@ -271,6 +271,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = U6V5MXK3VE;
+				"DEVELOPMENT_TEAM[sdk=xros*]" = U6V5MXK3VE;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SolarSysCodeAlong/Info.plist;
@@ -291,6 +292,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "HAPI Code Along SolarSys";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=xros*]" = "HAPI Code Along SolarSys";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -314,6 +316,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = U6V5MXK3VE;
+				"DEVELOPMENT_TEAM[sdk=xros*]" = U6V5MXK3VE;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SolarSysCodeAlong/Info.plist;
@@ -334,6 +337,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "HAPI Code Along SolarSys";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=xros*]" = "HAPI Code Along SolarSys";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
 				SUPPORTS_MACCATALYST = NO;

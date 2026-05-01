@@ -18,9 +18,9 @@ struct RotationSystem: System {
     
     func update(context: SceneUpdateContext) {
         // Iterate through all entities that have the RotationComponent
-        for entity in context.scene.performQuery(Self.query) {
+        for entity in context.entities(matching: Self.query, updatingSystemWhen: .rendering) {
             guard let rotationComponent = entity.components[RotationComponent.self] else { continue }
-            
+
             // Apply the animation logic
             let rotationAngle = rotationComponent.rotationSpeed * Float(context.deltaTime)
             let rotation = simd_quatf(angle: rotationAngle, axis: rotationComponent.rotationAxis)

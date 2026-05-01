@@ -25,7 +25,6 @@ struct SolarSysCodeAlongView: View {
                 )
             }
         }
-        .onAppear { RotationSystem.registerSystem() }
     }
 
     func addSphere(

@@ -6,12 +6,18 @@
 //
 
 import SwiftUI
+import RealityKit
 
 @main
 struct SolarSysCodeAlongApp: App {
     @State private var immersionStyle: ImmersionStyle = .full
 
-    var body: some Scene {
+    init() {
+        RotationComponent.registerComponent()
+        RotationSystem.registerSystem()
+    }
+
+    var body: some SwiftUI.Scene {
         WindowGroup {
             LaunchView()
         }
