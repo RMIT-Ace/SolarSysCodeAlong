@@ -76,7 +76,7 @@ struct SolarSysCodeAlongView: View {
     }
     
     func getRandomRotationSpeed() -> Float {
-        Float.random(in: 1.0...3.0)
+        Float.random(in: 0.5...1.0)
     }
 }
 
