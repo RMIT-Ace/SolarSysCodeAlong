@@ -10,7 +10,7 @@ import RealityKit
 
 @main
 struct SolarSysCodeAlongApp: App {
-    @State private var immersionStyle: ImmersionStyle = .full
+    @State private var immersionStyle: ImmersionStyle = .progressive
 
     init() {
         RotationComponent.registerComponent()
@@ -26,7 +26,7 @@ struct SolarSysCodeAlongApp: App {
         ImmersiveSpace(id: "solarSystem") {
             SolarSysCodeAlongView()
         }
-        .immersionStyle(selection: $immersionStyle, in: .full)
+        .immersionStyle(selection: $immersionStyle, in: .progressive)
     }
 }
 

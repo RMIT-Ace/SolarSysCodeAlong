@@ -16,7 +16,7 @@ struct SolarSysCodeAlongView: View {
         RealityView { content in
             await makeSkybox(content)
 
-            for _ in 0..<10 {
+            for _ in 0..<20 {
                 addSphere(
                     to: content,
                     size: getRandomSize(),
@@ -55,20 +55,20 @@ struct SolarSysCodeAlongView: View {
     
     func getRandomPosition() -> SIMD3<Float> {
         SIMD3(
-            Float.random(in: -2.0...2.0),
-            Float.random(in: -2.0...2.0),
-            Float.random(in: -2.0...2.0),
+            Float.random(in: -5.0...5.0),
+            Float.random(in: -5.0...5.0),
+            Float.random(in: -5.0...5.0),
         )
     }
     
     func getRandomRotationSpeed() -> Float {
-        Float.random(in: 1.0...3.0)
+        Float.random(in: 0.5...1.0)
     }
     
     func makeSkybox(_ content: RealityViewContent) async {
         // Skybox
         if let hapiLabTexture = try? await TextureResource(
-            named: "starfield"
+            named: "nebula"
         ) {
             let mesh = MeshResource.generateSphere(radius: 20)
             let material = UnlitMaterial(texture: hapiLabTexture)
