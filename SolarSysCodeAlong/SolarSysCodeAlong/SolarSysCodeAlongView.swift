@@ -19,7 +19,7 @@ struct SolarSysCodeAlongView: View {
             content.camera = .spatialTracking
             await setCameraTracking()
             
-            for _ in 0..<10 {
+            for _ in 0..<20 {
                 addSphere(
                     to: content,
                     size: getRandomSize(),
@@ -69,9 +69,9 @@ struct SolarSysCodeAlongView: View {
     
     func getRandomPosition() -> SIMD3<Float> {
         SIMD3(
-            Float.random(in: -2.0...2.0),
-            Float.random(in: -2.0...2.0),
-            Float.random(in: -2.0...2.0),
+            Float.random(in: -3.0...3.0),
+            Float.random(in: -3.0...3.0),
+            Float.random(in: -3.0...3.0),
         )
     }
     
