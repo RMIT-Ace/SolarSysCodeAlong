@@ -23,11 +23,14 @@ struct SolarSysCodeAlongView: View {
     var standardSpeed: Float {
         Self.secondsInOneEarthRotation / secondsInOneEarthDay
     }
+    
+    let trackingSession = SpatialTrackingSession()
 
     var body: some View {
         ZStack {
             RealityView { content in
                 content.camera = .spatialTracking
+                await setCameraTracking()
                 
                 content.add(await SkyboxEntity(.nebula))
                 content.add(await CrosshairEntity(action: updateCrosshairDisplay))
@@ -74,6 +77,15 @@ struct SolarSysCodeAlongView: View {
             targetDistance = String(format: "%0.2f m", distance)
         }
     }
+    
+    func setCameraTracking() async {
+            let config = SpatialTrackingSession.Configuration(
+                tracking: [.camera, .world, .plane, .object, .image],
+                sceneUnderstanding: [.shadow, .collision, .physics],
+                camera: .back
+            )
+            await trackingSession.run(config)
+        }
 }
 
 #Preview {
