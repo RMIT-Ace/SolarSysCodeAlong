@@ -16,8 +16,9 @@ struct SolarSysCodeAlongView: View {
 
     var body: some View {
         RealityView { content in
-            await turnOnCameraTracking(for: &content)
-            addRandomSphere(to: content, numOfSpheres: 20)
+            // Turn on camerat tracking
+            
+            // Add random spheres
         }
         .ignoresSafeArea()
     }
