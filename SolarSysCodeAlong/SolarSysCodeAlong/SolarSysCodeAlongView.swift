@@ -16,10 +16,26 @@ struct SolarSysCodeAlongView: View {
     let colors: [SimpleMaterial.Color] = [
         .red, .green, .blue, .brown, .yellow
     ]
+    
+    let rotationAxises: [SIMD3<Float>] = [
+        [1, 0, 0],
+        [0, 1, 0],
+        [0, 0, 1],
+    ]
 
     var body: some View {
         RealityView { content in
             // Turn on camerat tracking
+            
+            let center = ModelEntity(
+                mesh: .generateSphere(radius: 0.1),
+                materials: [SimpleMaterial(color: .red, isMetallic: true)]
+            )
+            center.components.set(
+                RotationComponent(rotationSpeed: 1.0)
+            )
+            content.add(center)
+            
             
             // Add random spheres
             for _ in 1...10 {
@@ -34,8 +50,12 @@ struct SolarSysCodeAlongView: View {
                 sphere.position.x = Float.random(in: -0.5...0.5)
                 sphere.position.y = Float.random(in: -1.0...1.0)
                 let rotationSpeed = Float.random(in: -1.0...1.0)
-                sphere.components.set(RotationComponent(rotationSpeed: rotationSpeed))
-                content.add(sphere)
+                let rotationComp = RotationComponent(
+                    rotationSpeed: Float.random(in: 0.5...3.0),
+                    rotationAxis: rotationAxises.randomElement()!
+                )
+                sphere.components.set(rotationComp)
+                center.addChild(sphere)
             }
         }
         .ignoresSafeArea()
