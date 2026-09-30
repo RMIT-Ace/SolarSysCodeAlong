@@ -26,6 +26,7 @@ struct SolarSysCodeAlongView: View {
     var body: some View {
         RealityView { content in
             // Turn on camerat tracking
+            await turnOnCameraTracking(for: &content)
             
             let center = ModelEntity(
                 mesh: .generateSphere(radius: 0.1),
